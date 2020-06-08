@@ -1,41 +1,20 @@
 <?php include "includes/db.php"?>
 <?php include "includes/header.php"?>
 <?php include "includes/navigation.php"?>
-   
-   
-   
-   
-   
-   
-    <!-- Page Content -->
-    <div class="container">
-        <div class="row">
-            <!-- Blog Entries Column -->
-                <div class="col-md-8">
-                    
-                    <?php
- 
-                            $query = "SELECT * FROM movies LIMIT 3 ";
-                            $select_all_movies_query = mysqli_query($connection, $query);
 
-                            while($row = mysqli_fetch_assoc($select_all_movies_query)){
-                                $movie_title = $row['movie_title'];
-                                $movie_director = $row['movie_director'];
-                                $movie_date = $row['movie_date'];
-                                $movie_image = $row['movie_image'];
-                                $movie_content = $row['movie_content'];
-                  
-                        ?>
-                            
-                            
-                            
-                            
-                <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
-
-                <!-- First Blog Post -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <?php
+            $query = "SELECT * FROM movies LIMIT 5 ";
+            $select_all_movies_query = mysqli_query($connection, $query);
+            while($row = mysqli_fetch_assoc($select_all_movies_query)){
+                $movie_title = $row['movie_title'];
+                $movie_director = $row['movie_director'];
+                $movie_date = $row['movie_date'];
+                $movie_image = $row['movie_image'];
+                $movie_content = $row['movie_content'];
+                ?>
                 <h2>
                     <a href="#"><?php echo $movie_title ?></a>
                 </h2>
@@ -50,36 +29,20 @@
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
-                            
-                            
-                
-                
-                <?php }?>
-
-                
-
-                
-
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
-                </ul>
-
-            </div>
-
-              <?php include "includes/sidebar.php"?>
-
+            <?php }?>
+            <ul class="pager">
+                <li class="previous">
+                    <a href="#">&larr; Older</a>
+                </li>
+                <li class="next">
+                    <a href="#">Newer &rarr;</a>
+                </li>
+            </ul>
         </div>
-        <!-- /.row -->
-
-        <hr>
+        <?php include "includes/sidebar.php"?>
+    </div>
+    <hr>
 </div>
-     
 
-     
-       
+
+

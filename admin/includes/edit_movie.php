@@ -1,31 +1,32 @@
 <?php
-if(isset($_POST['create_movie'])){
-    $movie_title= $_POST['movie_title'];
-    $movie_category_id = $_POST['movie_category_id'];
-    $movie_director =$_POST['movie_director'];
-    $movie_image = $_FILES['movie_image']['name'];
-    $movie_image_temp = $_FILES ['movie_image']['tmp_name'];
-    $movie_content = $_POST['movie_content'];
-    $movie_status = $_POST['movie_status'];
-    $movie_tags = $_POST['movie_tags'];
-    $movie_date = date('d-m-y');
 
-move_uploaded_file($movie_image_temp,"../images/$movie_image");
+if(isset($_GET['p_id'])) {
+
+    echo $_GET['p_id'];
+}
 
 
-$query ="INSERT INTO movies(movie_title,movie_category_id,movie_director,movie_date, movie_image,
- movie_content,movie_status,movie_tags)";
+$query = "SELECT * FROM movies";
+$select_movies_by_id= mysqli_query($connection, $query);
 
-    $query.= "VALUES('{$movie_title}',{$movie_category_id},'{$movie_director}',now(),'{$movie_image}'
-    ,'{$movie_content}','{$movie_status}','{$movie_tags}')";
+while($row = mysqli_fetch_assoc($select_movies_by_id)) {
+    $movie_id = $row['movie_id'];
+    $movie_title = $row['movie_title'];
+    $movie_director = $row['movie_director'];
+    $movie_date = $row['movie_date'];
+    $movie_content = $row['movie_content'];
+    $movie_tags = $row['movie_tags'];
+    $movie_status = $row['movie_status'];
+    $movie_image = $row['movie_image'];
+   
+}
 
-    $create_post_query = mysqli_query($connection,$query);
+?>
 
-    if(!$create_post_query){
-        die("Query failed ! ".mysqli_error($connection));
-    }
 
-}?>
+
+
+
 
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
@@ -68,7 +69,6 @@ $query ="INSERT INTO movies(movie_title,movie_category_id,movie_director,movie_d
     </div>
 
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="create_movie" value="Publish the movie">
+        <input class="btn btn-primary" type="submit" name="edit_movie" value="Publish the movie">
     </div>
 </form>
-
